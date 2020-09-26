@@ -4,16 +4,16 @@ import styled from 'styled-components'
 const RadioButton = ({history}) => {
   const [ inputStatus, setInputStatus ] = useState('')
 
-  const handleClickRadioButton = useCallback((string) => {
+  const handleClickRadioButton = (string) => {
     setInputStatus(string)
-  },[inputStatus])
+  }
 
-  const handleBackList = useCallback(() => {
+  const handleBackList = () => {
     const params = {
       pathname: '/'
     }
     history.push(params)
-  },[history])
+  }
 
   return (
     <>

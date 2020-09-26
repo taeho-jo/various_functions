@@ -4,12 +4,12 @@ import {functionList} from '../commons/variousFunctionList'
 
 const MainPage = ({history}) => {
 
-  const showFunctionPage = useCallback((pathname) => {
+  const showFunctionPage = (pathname) => {
     const params = {
       pathname: pathname
     }
     history.push(params)
-  },[history])
+  }
 
   const getList = useCallback(() => {
     return functionList.map(el => {
