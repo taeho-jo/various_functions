@@ -11,13 +11,13 @@ const MainPage = ({history}) => {
     history.push(params)
   }
 
-  const getList = useCallback(() => {
+  const getList = () => {
     return functionList.map(el => {
       return (
           <FunctionBox onClick={() => showFunctionPage(el.routes)}>{el.text}</FunctionBox>
       )
     })
-  },[])
+  }
 
   return (
         <MainContainer>
