@@ -4,20 +4,20 @@ import {functionList} from '../commons/variousFunctionList'
 
 const MainPage = ({history}) => {
 
-  const showFunctionPage = (pathname) => {
+  const showFunctionPage = useCallback((pathname) => {
     const params = {
       pathname: pathname
     }
     history.push(params)
-  }
+  },[history])
 
-  const getList = () => {
+  const getList = useCallback(() => {
     return functionList.map(el => {
       return (
           <FunctionBox onClick={() => showFunctionPage(el.routes)}>{el.text}</FunctionBox>
       )
     })
-  }
+  },[])
 
   return (
         <MainContainer>
