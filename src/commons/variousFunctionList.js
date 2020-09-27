@@ -4,8 +4,8 @@ export const functionList = [
     routes: '/radiobutton'
   },
   {
-    text: '',
-    routes: '/'
+    text: '이미지 업로드 / 미리보기',
+    routes: '/imgpreview'
   },
   {
     text: '',

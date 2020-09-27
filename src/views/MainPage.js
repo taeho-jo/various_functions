@@ -20,9 +20,9 @@ const MainPage = ({history}) => {
   },[])
 
   return (
-        <MainContainer>
-          {getList()}
-        </MainContainer>
+    <MainContainer>
+      {getList()}
+    </MainContainer>
   )
 }
 

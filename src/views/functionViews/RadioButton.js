@@ -1,12 +1,10 @@
 import React, {useCallback, useState} from 'react'
 import styled from 'styled-components'
+import BackButton from "../../commons/BackButton";
 
 const RadioButton = ({history}) => {
-  const [ inputStatus, setInputStatus ] = useState('')
 
-  const handleClickRadioButton = useCallback((string) => {
-    setInputStatus(string)
-  },[inputStatus])
+  const [ inputStatus, setInputStatus ] = useState('')
 
   const handleBackList = useCallback(() => {
     const params = {
@@ -15,61 +13,50 @@ const RadioButton = ({history}) => {
     history.push(params)
   },[history])
 
+  const handleClickRadioButton = useCallback((radioBtnName) => {
+    setInputStatus(radioBtnName)
+  },[inputStatus])
+
   return (
     <>
-      <Header>
-        <BackBtn onClick={handleBackList}>뒤로가기</BackBtn>
-      </Header>
+      <BackButton onClick={handleBackList} />
 
       <RadioBtnContainer>
 
         <RadioBtnBox>
-          <RadioBtn id='radio' checked={inputStatus === ''} type='radio' onClick={() => handleClickRadioButton('')}/>
-          <label htmlFor="radio">radio</label>
+          <RadioBtn type='radio' id='radio' checked={inputStatus === 'radio'} onClick={() => handleClickRadioButton('radio')}/>
+          <label htmlFor='radio'>Radio</label>
         </RadioBtnBox>
 
         <RadioBtnBox>
-          <RadioBtn id='radio1' checked={inputStatus === 'radio1'} type='radio' onClick={() => handleClickRadioButton('radio1')}/>
-          <label htmlFor="radio1">radio1</label>
+          <RadioBtn type='radio' id='radio1' checked={inputStatus === 'radio1'} onClick={() => handleClickRadioButton('radio1')}/>
+          <label htmlFor='radio1'>Radio1</label>
         </RadioBtnBox>
 
         <RadioBtnBox>
-          <RadioBtn id='radio2' checked={inputStatus === 'radio2'} type='radio' onClick={() => handleClickRadioButton('radio2')}/>
-          <label htmlFor="radio2">radio2</label>
+          <RadioBtn type='radio' id='radio2' checked={inputStatus === 'radio2'} onClick={() => handleClickRadioButton('radio2')}/>
+          <label htmlFor='radio2'>Radio2</label>
         </RadioBtnBox>
 
         <RadioBtnBox>
-          <RadioBtn id='radio3' checked={inputStatus === 'radio3'} type='radio' onClick={() => handleClickRadioButton('radio3')}/>
-          <label htmlFor="radio3">radio3</label>
+          <RadioBtn type='radio' id='radio3' checked={inputStatus === 'radio3'} onClick={() => handleClickRadioButton('radio3')}/>
+          <label htmlFor='radio3'>Radio3</label>
         </RadioBtnBox>
+
       </RadioBtnContainer>
 
-      <StateValue> state value : {inputStatus}</StateValue>
+      <StateValue> state value : {inputStatus} </StateValue>
+
      </>
   )
 }
 
 export default React.memo(RadioButton)
 
-const Header = styled.header`
-  //border: 1px solid yellow;
-  //width: 100%;
-  
-`
-const BackBtn = styled.button`
-  font-size: 20px;
-  padding: 10px 10px 10px 0;
-  background: none;
-  outline: none;
-  border: none;
-  cursor: pointer;
-`
-
 const RadioBtnContainer = styled.div`
   display: flex;
   margin-top: 20px;
   justify-content: center;
-  //border: 1px solid yellow;
   
   @media (max-width: 400px) {
     width: 100%;

@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import MainPage from "./views/MainPage";
 import RadioButton from "./views/functionViews/RadioButton";
-import styled from "styled-components";
+import FileUploadAndPreview from "./views/functionViews/FileUploadAndPreview";
 
 class Routes extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Routes extends React.Component {
                 <MainContainer>
                   <Route exact path="/" component={MainPage} />
                   <Route exact path="/radiobutton" component={RadioButton} />
+                  <Route exact path="/imgpreview" component={FileUploadAndPreview} />
                 </MainContainer>
               </Main>
             </Switch>
