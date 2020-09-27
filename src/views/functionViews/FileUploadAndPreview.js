@@ -1,8 +1,11 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import BackButton from "../../commons/BackButton";
 import styled from 'styled-components'
 
 const FileUploadAndPreview = ({history}) => {
+
+  const [ img, setImg ] = useState([])
+  const [ previewImg, setPreviewImg ] = useState([])
 
   const handleBackList = useCallback(() => {
     const params = {
@@ -11,13 +14,72 @@ const FileUploadAndPreview = ({history}) => {
     history.push(params)
   },[history])
 
+  const insertImg = (e) => {
+    let reader = new FileReader()
+
+    if(e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0])
+
+      setImg([...img, e.target.files[0]])
+    }
+
+    reader.onloadend = () => {
+      const previewImgUrl = reader.result
+
+      if(previewImgUrl) {
+        setPreviewImg([...previewImg, previewImgUrl])
+      }
+    }
+  }
+
+
+  const deleteImg = (index) => {
+    const imgArr = img.filter((el, idx) => idx !== index)
+    const imgNameArr = previewImg.filter((el, idx) => idx !== index)
+
+    setImg([...imgArr])
+    setPreviewImg([...imgNameArr])
+  }
+
+  const getPreviewImg = () => {
+    if(img === null || img.length === 0) {
+      return (
+        <ImgAreaContainer>
+          <ImgArea>
+            <Img src='https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif' alt='이미지없음' />
+          </ImgArea>
+          <ImgName>등록된 이미지가 없습니다.</ImgName>
+        </ImgAreaContainer>
+      )
+    } else {
+      return img.map((el, index) => {
+        const { name } = el
+
+        return (
+          <ImgAreaContainer key={index}>
+            <ImgArea>
+              <Img src={previewImg[index]}/>
+            </ImgArea>
+            <ImgName>{name}</ImgName>
+            <DeleteButton onClick={() => deleteImg(index)}>❌</DeleteButton>
+          </ImgAreaContainer>
+        )
+      })
+    }
+  }
+
 
   return (
     <>
       <BackButton onClick={handleBackList} />
       <MainContainer>
 
-        오늘은 이미지 미리보기!!
+        {getPreviewImg()}
+
+        <form encType='multipart/form-data'>
+          <Label htmlFor='file'>이미지 업로드</Label>
+          <FileInput type='file' id='file' onChange={(e) => insertImg(e)}/>
+        </form>
 
       </MainContainer>
     </>
