@@ -45,8 +45,6 @@ const RadioButton = ({history}) => {
       </RadioBtnContainer>
 
       <StateValue> state value : {inputStatus}</StateValue>
-
-
      </>
   )
 }

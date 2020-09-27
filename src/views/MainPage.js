@@ -46,6 +46,7 @@ const FunctionBox = styled.div`
   font-size: 20px;
   text-align: center;
   cursor: pointer;
+  border-radius: 10px;
   
   
   @media (max-width: 400px) {
